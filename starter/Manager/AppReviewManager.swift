@@ -34,7 +34,7 @@ class AppReviewManager: ObservableObject {
                 return Double(daysSinceLastRequest) >= minimumDaysBetweenRequests
     }
     
-    func autoRequestReview() {
+    func autoRequestReview() async {
         guard shouldRequestReview() else { return }
         
         // 리뷰 요청 횟수 증가
@@ -43,14 +43,22 @@ class AppReviewManager: ObservableObject {
         lastRequestDate = Date().timeIntervalSince1970
         
         // 리뷰 요청
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: windowScene)
+        if let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if #available(iOS 18.0, *) {
+                await StoreKit.AppStore.requestReview(in: windowScene)
+            } else {
+                await SKStoreReviewController.requestReview(in: windowScene)
+            }
         }
     }
     
-    func forceRequestReview() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: windowScene)
+    func forceRequestReview() async {
+        if let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if #available(iOS 18.0, *) {
+                await StoreKit.AppStore.requestReview(in: windowScene)
+            } else {
+                await SKStoreReviewController.requestReview(in: windowScene)
+            }
         }
     }
 }
