@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var updateChecker: AppUpdateChecker
     @State private var showUpdateAlert = false
+    @State private var hasShownUpdateAlert = false // 업데이트 알림을 이미 보여줬는지 추적
     
     var body: some View {
         NavigationView {
@@ -31,6 +32,16 @@ struct HomeView: View {
             .task {
                 await updateChecker.checkForUpdates(appId: AppVersion.appId)
                 showUpdateAlert = updateChecker.isUpdateAvailable
+            }
+            .onAppear {
+                if hasShownUpdateAlert {
+                    showUpdateAlert = false
+                }
+            }
+            .onChange(of: showUpdateAlert) { _, newValue in
+                if !newValue {
+                    hasShownUpdateAlert = true
+                }
             }
         }
     }

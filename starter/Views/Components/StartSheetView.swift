@@ -35,7 +35,8 @@ struct StartSheetView: View {
     private var TextFieldView: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("이름 설정")
-                .pretendardStyle(by: .Regular, on: .Callout, fill: .black.opacity(0.5))
+                .font(.callout)
+                .foregroundStyle(.black.opacity(0.5))
             
             ZStack {
                 HStack(spacing: 4) {
@@ -44,7 +45,8 @@ struct StartSheetView: View {
                         .foregroundStyle(.gray)
                     
                     TextField("홍길동", text: $name)
-                        .pretendardStyle(by: .Regular, on: .Body, fill: .black)
+                        .font(.body)
+                        .foregroundStyle(.black)
                         .onChange(of: name) { _, newValue in
                             if newValue.count > characterLimit {
                                 name = String(newValue.prefix(characterLimit))
@@ -64,7 +66,9 @@ struct StartSheetView: View {
                     HStack {
                         Spacer()
                         Text("\(name.count)/15")
-                            .pretendardStyle(by: .Light, on: .Caption2, fill: .black.opacity(0.4))
+                            .font(.caption2)
+                            .foregroundStyle(.black.opacity(0.4))
+                            .fontWeight(.light)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
                     }
@@ -109,7 +113,9 @@ struct StartSheetView: View {
                 Text("입니다.")
             }
         }
-        .pretendardStyle(by: .Regular, on: .Caption1, fill: .gray.opacity(0.7))
+        .font(.caption)
+        .foregroundStyle(.gray.opacity(0.7))
+        .fontWeight(.regular)
         .multilineTextAlignment(.center)
     }
     
@@ -119,7 +125,9 @@ struct StartSheetView: View {
             onSuccess()
         } label: {
             Text("날마음 시작하기")
-                .pretendardStyle(by: .SemiBold, on: .Body, fill: disabled ? .white.opacity(0.7) : .white)
+                .font(.body)
+                .foregroundStyle(disabled ? .white.opacity(0.7) : .white)
+                .fontWeight(.semibold)
                 .frame(width: max(width, 0))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
@@ -142,7 +150,8 @@ struct StartSheetView: View {
             name = ""
         } label: {
             Text("취소")
-                .pretendardStyle(by: .Regular, on: .Body, fill: .white)
+                .font(.body)
+                .foregroundStyle(.white)
                 .frame(width: max(width, 0))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)

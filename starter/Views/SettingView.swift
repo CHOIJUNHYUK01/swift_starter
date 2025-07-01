@@ -29,7 +29,8 @@ struct SettingView: View {
                                     .foregroundStyle(.gray)
                                 
                                 TextField(userName, text: $userName)
-                                    .pretendardStyle(by: .Regular, on: .Body, fill: .white)
+                                    .font(.body)
+                                    .foregroundStyle(.white)
                                     .onChange(of: userName) { _, newValue in
                                         if newValue.count > characterLimit {
                                             userName = String(newValue.prefix(characterLimit))
@@ -49,7 +50,9 @@ struct SettingView: View {
                                 HStack {
                                     Spacer()
                                     Text("\(userName.count)/15")
-                                        .pretendardStyle(by: .Light, on: .Caption2, fill: userName.count >= characterLimit ? .red : .gray)
+                                        .font(.caption2)
+                                        .foregroundStyle(userName.count >= characterLimit ? .red : .gray)
+                                        .fontWeight(.light)
                                         .padding(.horizontal, 12)
                                         .padding(.vertical, 8)
                                 }
@@ -65,7 +68,9 @@ struct SettingView: View {
                         } label: {
                                 HStack {
                                     Text("개인정보처리방침")
-                                        .pretendardStyle(by: .Regular, on: .Body, fill: .white)
+                                        .font(.body)
+                                        .foregroundStyle(.white)
+                                        .fontWeight(.light)
                                     
                                     Spacer()
                                     
@@ -89,7 +94,8 @@ struct SettingView: View {
                         } label: {
                                 HStack {
                                     Text("서비스이용약관")
-                                        .pretendardStyle(by: .Regular, on: .Body, fill: .white)
+                                        .font(.body)
+                                        .foregroundStyle(.white)
                                     
                                     Spacer()
                                     
@@ -115,7 +121,8 @@ struct SettingView: View {
                             
                             HStack {
                                 Text("앱스토어 리뷰 남기기")
-                                    .pretendardStyle(by: .Regular, on: .Body, fill: .white)
+                                    .font(.body)
+                                    .foregroundStyle(.white)
                                 
                                 Spacer()
                                 
@@ -128,9 +135,12 @@ struct SettingView: View {
                     
                     VStack(alignment: .center) {
                         Text("현재 버전 정보")
-                            .pretendardStyle(by: .Bold, on: .Callout, fill: .gray.opacity(0.4))
+                            .font(.callout)
+                            .foregroundStyle(.gray.opacity(0.4))
+                            .fontWeight(.bold)
                         Text("v\(AppVersion.current)")
-                            .pretendardStyle(by: .Regular, on: .Caption2, fill: .gray.opacity(0.4))
+                            .font(.caption2)
+                            .foregroundStyle(.gray.opacity(0.4))
                     }
                 }
             }
@@ -145,7 +155,8 @@ struct SettingView: View {
     private func SettingSection(title: String, content: () -> some View) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
-                .pretendardStyle(by: .Regular, on: .Caption1, fill: .gray)
+                .font(.caption)
+                .foregroundStyle(.gray)
             
             content()
         }

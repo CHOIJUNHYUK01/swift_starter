@@ -93,7 +93,9 @@ struct OnboardingView: View {
             HStack(alignment: .top, spacing: 0) {
                 ForEach(OnboardingPage.allCases, id: \.rawValue) { page in
                     Text(page.title)
-                        .pretendardStyle(by: .SemiBold, on: .Title2, fill: .white)
+                        .font(.title2)
+                        .foregroundStyle(.white)
+                        .fontWeight(.semibold)
                         .lineLimit(1)
                         .kerning(1.1)
                         .frame(width: size.width)
@@ -105,7 +107,8 @@ struct OnboardingView: View {
             HStack(alignment: .top, spacing: 0) {
                 ForEach(OnboardingPage.allCases, id: \.rawValue) { page in
                     Text(page.subTitle)
-                        .pretendardStyle(by: .Regular, on: .Callout, fill: .gray)
+                        .font(.callout)
+                        .foregroundStyle(.gray)
                         .multilineTextAlignment(.center)
                         .frame(width: size.width)
                 }
@@ -138,7 +141,9 @@ struct OnboardingView: View {
             }
         } label: {
             Text(activePage == .page5 ? "시작하기" : "계속하기")
-                .pretendardStyle(by: .SemiBold, on: .Body, fill: .black)
+                .font(.body)
+                .foregroundStyle(.black)
+                .fontWeight(.semibold)
                 .contentTransition(.identity)
                 .padding(.vertical, 15)
                 .frame(maxWidth: 220)
